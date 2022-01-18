@@ -55,7 +55,7 @@ export const fontsStyle = () => {
                         }
                         else if(fontWeight.toLowerCase() === 'black'){
                             fontWeight = 900;
-                        }
+                        } 
                         else{
                             fontWeight = 400;
                         }
