@@ -1,2 +1,2 @@
-import * as f from './modules/functions.js'
-f.l('0');
+import { isWebp } from "./modules/webP.js";
+isWebp();
