@@ -1,22 +1,20 @@
-import fileinclude from "gulp-file-include"
-import webpHtmlNosvg from "gulp-webp-html-nosvg"
-import versionNumber from "gulp-version-number"
+import { path } from "../config/path.js";
+import gulp from "gulp";
+import browserSync from "browser-sync";
+import gulpPlumber from "gulp-plumber";
+import notify from 'gulp-notify';
+import fileinclude from "gulp-file-include";
+import replace from "gulp-replace";
 export const html = () => {
-    return app.gulp.src(app.path.src.html)
+    return gulp.src(path.src.html)
+    .pipe(gulpPlumber(
+        notify.onError({
+            title: "HTML",
+            message: `Error: <%= error.message %>`
+        })
+    ))
     .pipe(fileinclude())
-    .pipe(app.plugins.replace(/@img\//g, 'img/'))
-    .pipe(webpHtmlNosvg())
-    .pipe(versionNumber({
-        'value': '%DT%',
-        'append': {
-            'key': '_v',
-            'cover': 0,
-            'to':['css', 'js']
-        },
-        'output': {
-            'file': 'gulp/version.json'
-        }
-    }))
-    .pipe(app.gulp.dest(app.path.build.html))
-    .pipe(app.plugins.browsersync.stream());
+    .pipe(replace(/@img\//g, 'img/'))
+    .pipe(gulp.dest(path.build.html))
+    .pipe(browserSync.stream());
 }

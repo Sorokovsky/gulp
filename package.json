@@ -35,8 +35,7 @@
     "webpack-stream": "^7.0.0"
   },
   "scripts": {
-    "dev": "gulp",
-    "svgSprive": "gulp svgSprive"
+    "dev": "gulp --build"
   },
   "author": "",
   "license": "ISC"

@@ -1,4 +1,5 @@
-import del from 'del';
+import { path } from "../config/path.js";
+import del from "del";
 export const reset = () => {
-    return del(app.path.clean);
+    return del(path.clean);
 }

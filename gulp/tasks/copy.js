@@ -1,4 +1,6 @@
+import { path } from "../config/path.js";
+import gulp from 'gulp';
 export const copy = () => {
-    return app.gulp.src(app.path.src.files)
-    .pipe(app.gulp.dest(app.path.build.files))
+    const files = path.src.files;
+    return gulp.src(files, { allowEmpty: true}).pipe(gulp.dest(path.build.files));
 }
