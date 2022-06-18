@@ -2,6 +2,7 @@ import webpack from "webpack-stream";
 import gulp from 'gulp';
 import { path } from "../config/path.js";
 import gulpPlumber from "gulp-plumber";
+import { notify } from "gulp-notify";
 export const js = () => {
     return gulp.src(path.src.js, {sourcemaps: true})
     .pipe(gulpPlumber(
