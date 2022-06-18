@@ -1,5 +1,6 @@
 import webpack from "webpack-stream";
 import gulp from 'gulp';
+import { path } from "../config/path.js";
 export const js = () => {
     return gulp.src(path.src.js, {sourcemaps: true})
     .pipe(gulpPlumber(
