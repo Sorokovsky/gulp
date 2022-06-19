@@ -10,7 +10,7 @@ import { plugins } from './gulp/config/plugins.js';
 import { ttfToWoff, otfToTtf, fontsStyle } from "./gulp/tasks/fonts.js";
 import gulp from 'gulp'; 
 const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle)
-const mainTasks = gulp.parallel(html, fonts, images, scss,copy, js);
+const mainTasks = gulp.parallel(html, gulp.series(fonts, scss), images, copy, js);
 function watcher() {
     gulp.watch(app.path.watch.files, copy);
     gulp.watch(app.path.watch.html, html);

@@ -10,7 +10,7 @@ export const scss = () => {
         })
     )))
     .pipe(app.plugins.replace(/@img\//g, '../img/'))
-    .pipe(app.plugins.gulpIf(app.isBuild, s({outputStyle: 'expanded'})))
+    .pipe(s({outputStyle: 'expanded'}))
     .pipe(app.plugins.gulpIf(app.isBuild, app.plugins.gulpCssMediaQueries()))
     .pipe(app.plugins.gulpIf(app.isBuild, app.plugins.webpcss({
         webpClass: '.webp',
