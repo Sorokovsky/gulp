@@ -4,7 +4,7 @@ import { path } from "../config/path.js";
 import gulpPlumber from "gulp-plumber";
 import notify from "gulp-notify";
 import browserSync from "browser-sync";
-export const js = () => {
+export const js = async() => {
     return gulp.src(path.src.js, {sourcemaps: true})
     .pipe(gulpPlumber(
         notify.onError({

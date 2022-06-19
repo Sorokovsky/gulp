@@ -6,7 +6,7 @@ import gulpPlumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import gulp from 'gulp';
 import newer from 'gulp-newer';
-export const images = () => {
+export const images = async() => {
     return gulp.src(path.src.images, { sourcemaps:true })
     .pipe(gulpPlumber(
         notify.onError({

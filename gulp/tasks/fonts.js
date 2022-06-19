@@ -2,26 +2,28 @@ import fs from 'fs';
 import fonter from 'gulp-fonter';
 import ttf2woff2 from 'gulp-ttf2woff2';
 import { path } from '../config/path.js';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
 export const otfToTtf = () => {
-    return app.gulp.src(`${path.srcFolder}/fonts/*.otf`, {})
+    return gulp.src(`${path.srcFolder}/fonts/*.otf`, {})
         .pipe(fonter({
             formats: ['ttf']
         }))
-        .pipe(app.gulp.dest(`${path.srcFolder}/fonts/`))
+        .pipe(gulp.dest(`${path.srcFolder}/fonts/`))
         
 }
 export const ttfToWoff = () => {
-    return app.gulp.src(`${path.srcFolder}/fonts/*.ttf`, {})
+    return gulp.src(`${path.srcFolder}/fonts/*.ttf`, {})
         .pipe(fonter({
             formats: ['woff']
         }))
         .pipe(ttf2woff2())
-        .pipe(app.gulp.dest(`${path.build.fonts}`))
-        .pipe(app.gulp.src(`${path.srcFolder}/fonts/*.ttf`))
+        .pipe(gulp.dest(`${path.build.fonts}`))
+        .pipe(gulp.src(`${path.srcFolder}/fonts/*.ttf`))
         .pipe(ttf2woff2())
-        .pipe(app.gulp.dest(`${path.build.fonts}`));
+        .pipe(gulp.dest(`${path.build.fonts}`));
 }
-export const fontsStyle = () => {
+export const fontsStyle = async() => {
     let fontsFile = `${path.srcFolder}/scss/fonts.scss`;
     fs.readdir(path.build.fonts, function(err, fontsFiles){
         if (fontsFiles === undefined) {
@@ -76,18 +78,4 @@ export const fontsStyle = () => {
     function cb(){
 
     }
-}
-export const fonts = () => {
-    return gulp.src(path.src.fonts, {sourcemaps: true})
-    .pipe(gulpPlumber(
-        notify.onError({
-            title: "FONTS",
-            message: `Error: <%= error.message %>`
-        })
-    ))
-    .pipe(otfToTtf())
-    .pipe(ttfToWoff())
-    .pipe(fontsStyle())
-    .pipe(gulp.dest(path.build.fonts))
-    .pipe(browserSync.stream());
 }
