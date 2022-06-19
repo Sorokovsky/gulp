@@ -1,24 +1,16 @@
-import { path } from "../config/path.js";
-import gulp from "gulp";
-import browserSync from "browser-sync";
-import gulpPlumber from "gulp-plumber";
-import notify from 'gulp-notify';
-import fileinclude from "gulp-file-include";
-import replace from "gulp-replace";
-import versionNumber from 'gulp-version-number';
-import webpHtmlnovsg from 'gulp-webp-html-nosvg';
+import { app } from "../../gulpfile.js";
 export const html = () => {
-    return gulp.src(path.src.html, {sourcemaps: true})
+    return gulp.src(app.path.src.html, {sourcemaps: true})
     .pipe(gulpPlumber(
         notify.onError({
             title: "HTML",
             message: `Error: <%= error.message %>`
         })
     ))
-    .pipe(fileinclude())
-    .pipe(replace(/@img\//g, 'img/'))
-    .pipe(webpHtmlnovsg())
-    .pipe(versionNumber({
+    .pipe(app.plugins.fileinclude())
+    .pipe(app.plugins.replace(/@img\//g, 'img/'))
+    .pipe(app.plugins.webpHtmlnovsg())
+    .pipe(app.plugins.versionNumber({
         'value': '%DT%',
         'append': {
             'key': '_v',
@@ -27,6 +19,6 @@ export const html = () => {
         },
         'output': {'file': 'gulp/versions.json'}
     }))
-    .pipe(gulp.dest(path.build.html))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest(app.path.build.html))
+    .pipe(app.plugins.browserSync.stream());
 }

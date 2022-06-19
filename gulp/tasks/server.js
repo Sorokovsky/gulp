@@ -1,7 +1,6 @@
-import browserSync from "browser-sync";
-import { path } from "../config/path.js";
+import { app } from "../../gulpfile.js";
 export const server = () => {
-     browserSync.init({
+     app.plugins.browserSync.init({
         server: {
             baseDir: path.clean,
         },

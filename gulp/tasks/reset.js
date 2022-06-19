@@ -1,5 +1,4 @@
-import { path } from "../config/path.js";
-import del from "del";
+import { app } from "../../gulpfile.js";
 export const reset = () => {
-    return del(path.clean);
+    return app.plugins.del(app.path.clean);
 }
