@@ -14,7 +14,7 @@ export const ttfToWoff = () => {
         }))
         .pipe(app.plugins.ttf2woff2())
         .pipe(app.plugins.gulp.dest(`${app.path.build.fonts}`))
-        .pipe(app.plugins.gulp.src(`${app.plugins.path.srcFolder}/fonts/*.ttf`))
+        .pipe(app.plugins.gulp.src(`${app.path.srcFolder}/fonts/*.ttf`))
         .pipe(app.plugins.ttf2woff2())
         .pipe(app.plugins.gulp.dest(`${app.path.build.fonts}`));
 }

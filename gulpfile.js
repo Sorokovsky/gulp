@@ -8,11 +8,7 @@ import { js } from "./gulp/tasks/js.js";
 import { images } from "./gulp/tasks/images.js";
 import { plugins } from './gulp/config/plugins.js';
 import { ttfToWoff, otfToTtf, fontsStyle } from "./gulp/tasks/fonts.js";
-import gulp from 'gulp';
-export const app = {
-    plugins: plugins,
-    path: path
-} 
+import gulp from 'gulp'; 
 const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle)
 const mainTasks = gulp.parallel(html, fonts, images, scss,copy, js);
 function watcher() {
@@ -24,4 +20,12 @@ function watcher() {
     gulp.watch(app.path.watch.fonts, fonts);
 }
 const dev = gulp.series(reset, mainTasks, gulp.parallel(server, watcher));
+const build = gulp.series(reset, mainTasks);
+export {dev, build};
+export const app = {
+    plugins: plugins,
+    path: path,
+    isBuild: process.argv.includes('--build'),
+    isDev: !process.argv.includes('--build'),
+}
 gulp.task('default', dev);
