@@ -1,2 +1,2 @@
-import { isWebp, transfer} from "./modules/functions.js";
+import { isWebp } from "./modules/functions.js";
 isWebp();
